@@ -12,7 +12,7 @@ export default function PortfolioLanding() {
     const [activeSection, setActiveSection] = useState("home");
     const [isDarkMode, setIsDarkMode] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
-    const [activeExpIndex, setActiveExpIndex] = useState(2); // Defaults to latest experience (Index 2: 2024-Present)
+    const [activeExpIndex, setActiveExpIndex] = useState(2);
 
     const profileCardRef = useRef<HTMLDivElement>(null);
 
