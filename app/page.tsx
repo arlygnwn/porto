@@ -13,7 +13,6 @@ export default function PortfolioLanding() {
     const [isDarkMode, setIsDarkMode] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
     const [activeExpIndex, setActiveExpIndex] = useState(2);
-
     const profileCardRef = useRef<HTMLDivElement>(null);
 
     const mouseX = useMotionValue(0);
