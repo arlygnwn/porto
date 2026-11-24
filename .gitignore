@@ -49,3 +49,18 @@ next-env.d.ts
 !.dev.vars.example
 
 !.env.example
+.idea/modules.xml
+.idea/porto.iml
+.idea/vcs.xml
+
+# other package manager lockfiles (using pnpm)
+package-lock.json
+yarn.lock
+.pnpm-store/
+
+# logs
+logs/
+*.log
+
+# os
+Thumbs.db

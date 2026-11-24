@@ -1,9 +1,84 @@
 import type { NextConfig } from "next";
 
+const cspHeader = `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' blob: data: https:;
+    font-src 'self' https://cdn.jsdelivr.net;
+    connect-src 'self' https://*.supabase.co wss://*.supabase.co;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+`;
+
+const extraDevOrigins = process.env.ALLOWED_DEV_ORIGINS
+  ? process.env.ALLOWED_DEV_ORIGINS.split(',').map(origin => origin.trim()).filter(Boolean)
+  : [];
+
 const nextConfig: NextConfig = {
   /* config options here */
+  allowedDevOrigins: [
+    "porto.service.local",
+    "porto.service.local:80",
+    "localhost",
+    "localhost:80",
+    "localhost:3000",
+    "127.0.0.1",
+    "127.0.0.1:80",
+    "192.168.20.201",
+    "192.168.20.201:80",
+    "192.168.20.201:3000",
+    "192.168.18.65",
+    "192.168.18.65:80",
+    "192.168.18.65:3000",
+    ...extraDevOrigins
+  ],
+  async headers() {
+    if (process.env.NODE_ENV !== 'production') {
+      return [];
+    }
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: cspHeader.replace(/\s{2,}/g, ' ').trim(),
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          }
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
 
-import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
+if (process.platform !== 'win32') {
+  import('@opennextjs/cloudflare').then(m => m.initOpenNextCloudflareForDev());
+}

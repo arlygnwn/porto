@@ -5,11 +5,6 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -38,12 +33,6 @@ body {
   font-style: normal;
 }
 
-/* 2. Map them inside the Tailwind v4 theme */
-@theme {
-  --font-sans: 'Geist Sans', sans-serif;
-  --font-mono: 'Geist Mono', monospace;
-}
-
 .clouds-drift {
   /* Using linear so it never stutters when it loops */
   animation: drift 40s linear infinite;
@@ -51,10 +40,47 @@ body {
 
 @keyframes drift {
   from {
-    background-position: 0px 0px;
+    background-position: 0 0;
   }
+
   to {
     /* This matches the bg-[length:400px] so the loop is perfectly seamless */
-    background-position: 400px 0px;
+    background-position: 400px 0;
   }
+}
+
+/* Hide all scrollbars globally while preserving scroll behavior */
+* {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE / Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  /* Chrome / Safari / Edge */
+}
+
+/* Scroll snapping for section transitions */
+html,
+body {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 1023px) {
+
+  html,
+  body {
+    scroll-snap-type: y proximity;
+    /* More forgiving scroll-snapping on mobile screens */
+  }
+}
+
+section[id] {
+  scroll-snap-align: start;
+  scroll-margin-top: 4rem;
+  /* Height of the fixed navigation header */
+  scroll-snap-stop: always;
 }
