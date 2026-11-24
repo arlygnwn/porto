@@ -7,6 +7,7 @@ const outfit = Outfit({ subsets: ["latin"], display: "swap" });
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+    metadataBase: new URL("https://arly.tigaempat.com"),
     title: "Arly | Backend Developer",
     description: "Backend developer focused on building robust server runtimes, understanding network layers, and automating deployment pipelines. Passionate about system stability and DevOps fundamentals.",
     keywords: ["Backend Developer", "Network Administrator", "DevOps", "Portfolio", "Arly", "Java", "Docker", "Linux", "Cisco", "Python"],
@@ -24,7 +25,6 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Arly | Backend Developer",
         description: "Backend developer focused on building robust server runtimes, understanding network layers, and automating deployment pipelines.",
-        creator: "@yourtwitterhandle", // Update to actual handle if available
     },
     robots: {
         index: true,
