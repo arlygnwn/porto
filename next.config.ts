@@ -1,3 +1,4 @@
+import os from "os";
 import type { NextConfig } from "next";
 
 const cspHeader = `
@@ -13,28 +14,41 @@ const cspHeader = `
     frame-ancestors 'none';
 `;
 
+function getLocalNetworkIps(): string[] {
+  try {
+    const interfaces = os.networkInterfaces();
+    const ips = new Set<string>(["127.0.0.1"]);
+
+    for (const entries of Object.values(interfaces)) {
+      if (!entries) continue;
+      for (const entry of entries) {
+        if (entry.family === "IPv4" && entry.address) {
+          ips.add(entry.address);
+        }
+      }
+    }
+
+    return Array.from(ips);
+  } catch {
+    return ["127.0.0.1"];
+  }
+}
+
 const extraDevOrigins = process.env.ALLOWED_DEV_ORIGINS
   ? process.env.ALLOWED_DEV_ORIGINS.split(',').map(origin => origin.trim()).filter(Boolean)
   : [];
 
 const nextConfig: NextConfig = {
   /* config options here */
-  allowedDevOrigins: [
+  // Next.js matches only the hostname (ports are ignored), and dynamically
+  // reading os.networkInterfaces() covers localhost/LAN/VPN IPs automatically.
+  allowedDevOrigins: Array.from(new Set([
     "porto.service.local",
-    "porto.service.local:80",
     "localhost",
-    "localhost:80",
-    "localhost:3000",
-    "127.0.0.1",
-    "127.0.0.1:80",
-    "192.168.20.201",
-    "192.168.20.201:80",
-    "192.168.20.201:3000",
-    "192.168.18.65",
-    "192.168.18.65:80",
-    "192.168.18.65:3000",
-    ...extraDevOrigins
-  ],
+    "rly.tail1787c8.ts.net",
+    ...getLocalNetworkIps(),
+    ...extraDevOrigins,
+  ])),
   async headers() {
     if (process.env.NODE_ENV !== 'production') {
       return [];

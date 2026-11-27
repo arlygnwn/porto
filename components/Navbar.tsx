@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Briefcase, FolderGit2, Code, User, Sun, Moon, Palette, FileText } from 'lucide-react';
+import { Home, Briefcase, FolderGit2, Code, User, Sun, Moon, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAppContext } from '@/providers/AppProvider';
@@ -109,7 +109,7 @@ export default function Navbar() {
                         <span className="hidden sm:inline">Resume</span>
                     </motion.a>
 
-                    {/* Commission CTA Button */}
+                    {/* Commission CTA Button (hidden)
                     <motion.a
                         href="/commission"
                         onClick={(e) => {
@@ -131,6 +131,7 @@ export default function Navbar() {
                         <Palette size={14} /> 
                         <span>Commission</span>
                     </motion.a>
+                    */}
 
                     {/* Theme Toggle Button */}
                     <motion.button
