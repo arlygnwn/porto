@@ -24,23 +24,23 @@ export default function Projects({
     return (
         <section
             id="project"
-            className="w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-24 relative overflow-hidden"
+            className="w-full sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-14 sm:py-24 relative overflow-hidden"
         >
             {/* Background glowing orb */}
             <div className="absolute top-0 right-0 w-120 h-120 bg-purple-500/5 rounded-full blur-[120px] pointer-events-none" />
 
             {/* Header Area */}
-            <ScrollReveal className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 w-full max-w-6xl mx-auto relative z-10">
+            <ScrollReveal className="mb-8 sm:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 w-full max-w-6xl mx-auto relative z-10">
                 <div>
-                    <h2 className={`text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Featured Projects</h2>
-                    <div className={`h-1 w-20 mt-4 rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
-                    <p className={`text-base mt-6 font-medium ${textMuted}`}>A snapshot of my latest architectural designs and engineering builds.</p>
+                    <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Featured Projects</h2>
+                    <div className={`h-1 w-16 sm:w-20 mt-3 sm:mt-4 rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
+                    <p className={`text-xs sm:text-base mt-3 sm:mt-6 font-medium ${textMuted}`}>A snapshot of my latest architectural designs and engineering builds.</p>
                 </div>
             </ScrollReveal>
 
             {/* Grid Area */}
-            <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center gap-12 z-10">
-                <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mx-auto">
+            <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center gap-8 sm:gap-12 z-10">
+                <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full mx-auto">
                     <AnimatePresence mode="popLayout">
                         {showcaseProjects.map((project, idx) => {
                             // First project is featured (larger width) if there are enough projects
@@ -60,7 +60,7 @@ export default function Projects({
                                         damping: 24
                                     }}
                                     onClick={() => onProjectClick(project.id)}
-                                    className={`border rounded-[2.5rem] p-8 flex flex-col justify-between relative overflow-hidden backdrop-blur-xl group cursor-pointer
+                                    className={`border rounded-3xl sm:rounded-[2.5rem] p-5 sm:p-8 flex flex-col justify-between relative overflow-hidden backdrop-blur-xl group cursor-pointer
                                         ${isFeatured ? 'md:col-span-2 lg:col-span-2' : 'col-span-1'}
                                         transition-[border-color,box-shadow] duration-500
                                         ${isDarkMode
@@ -70,27 +70,27 @@ export default function Projects({
                                     `}
                                 >
                                     {/* Neon ambient glow lines */}
-                                    <div className={`absolute inset-0 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_0%_100%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_0%_100%] from-purple-700/5 via-transparent to-transparent'}`} />
+                                    <div className={`absolute inset-0 rounded-3xl sm:rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_0%_100%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_0%_100%] from-purple-700/5 via-transparent to-transparent'}`} />
 
-                                    <div className="space-y-6">
-                                        <div className="flex items-start justify-between gap-3 font-sans">
-                                            <span className={`text-[10px] font-bold tracking-widest uppercase border px-3 py-1 rounded-full truncate max-w-[70%] ${isDarkMode ? 'text-purple-400 bg-purple-500/10 border-purple-500/20' : 'text-purple-800 bg-purple-50 border-purple-200'}`}>
+                                    <div className="space-y-4 sm:space-y-6">
+                                        <div className="flex items-start justify-between gap-3">
+                                            <span className={`font-mono text-[10px] font-bold tracking-widest uppercase border px-2.5 sm:px-3 py-1 rounded-full truncate max-w-[70%] ${isDarkMode ? 'text-purple-400 bg-purple-500/10 border-purple-500/20' : 'text-purple-800 bg-purple-50 border-purple-200'}`}>
                                                 {project.company}
                                             </span>
-                                            <span className={`text-xs font-semibold shrink-0 mt-1 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{project.period}</span>
+                                            <span className={`font-mono text-[11px] sm:text-xs font-medium shrink-0 mt-1 ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{project.period}</span>
                                         </div>
 
-                                        <h3 className={`text-2xl sm:text-3xl font-black tracking-tight leading-snug ${isDarkMode ? 'text-zinc-100 group-hover:text-white' : 'text-zinc-900 group-hover:text-black'} transition-colors duration-300`}>
+                                        <h3 className={`text-xl sm:text-2xl md:text-3xl font-black tracking-tight leading-snug ${isDarkMode ? 'text-zinc-100 group-hover:text-white' : 'text-zinc-900 group-hover:text-black'} transition-colors duration-300`}>
                                             {project.name}
                                         </h3>
                                     </div>
 
-                                    <div className={`pt-6 mt-8 border-t flex flex-col gap-4 justify-end ${isDarkMode ? 'border-zinc-800/40' : 'border-zinc-200/60'}`}>
+                                    <div className={`pt-4 sm:pt-6 mt-5 sm:mt-8 border-t flex flex-col gap-3 sm:gap-4 justify-end ${isDarkMode ? 'border-zinc-800/40' : 'border-zinc-200/60'}`}>
                                         <div className="flex flex-wrap gap-1.5">
                                             {project.tech && project.tech.map((t: string) => (
                                                 <span 
                                                     key={t} 
-                                                    className={`px-3 py-1 font-sans text-xs font-semibold rounded-lg transition-colors ${
+                                                    className={`px-2.5 py-0.5 sm:px-3 sm:py-1 font-mono text-[10px] sm:text-[11px] font-medium rounded-lg transition-colors ${
                                                         isDarkMode 
                                                         ? 'bg-zinc-800/50 text-zinc-400 group-hover:bg-zinc-800 group-hover:text-zinc-300' 
                                                         : 'bg-zinc-100 text-zinc-600 group-hover:bg-zinc-200 group-hover:text-zinc-800'

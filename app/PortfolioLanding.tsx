@@ -227,7 +227,7 @@ export default function PortfolioLanding({
             <div className={`w-full h-px bg-linear-to-r ${isDarkMode ? 'from-transparent via-zinc-800 to-transparent' : 'from-transparent via-zinc-300 to-transparent'}`} />
 
             {/* ═══════════════════════ FOOTER ═══════════════════════ */}
-            <footer className={`w-full py-12 px-4 border-t ${isDarkMode ? 'border-zinc-900/50' : 'border-zinc-200/60'} mt-16 relative z-10`}>
+            <footer className={`w-full py-8 sm:py-12 px-4 border-t ${isDarkMode ? 'border-zinc-900/50' : 'border-zinc-200/60'} mt-8 sm:mt-16 relative z-10`}>
                 <div className="max-w-6xl mx-auto flex flex-col items-center gap-6">
                     <motion.button
                         whileHover={{ y: -5, scale: 1.1 }}
@@ -239,7 +239,6 @@ export default function PortfolioLanding({
                         <ChevronUp size={20} />
                     </motion.button>
                     <div className={`flex flex-col items-center gap-2 text-xs font-bold tracking-widest ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                        <span>Built with Next.js &amp; Supabase</span>
                         <span>© {new Date().getFullYear()} — All Rights Reserved</span>
                     </div>
                 </div>

@@ -104,38 +104,38 @@ export default function Profile({
         : 'bg-white/80 border-zinc-200/80 hover:border-purple-700/30';
 
     return (
-        <section id="profile" className="w-full min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-24 pb-16 relative overflow-hidden">
+        <section id="profile" className="w-full sm:min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-16 pb-12 sm:pt-24 sm:pb-16 relative overflow-hidden">
             {/* Subtle ambient glow */}
             <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-            <ScrollReveal className="w-full max-w-6xl mx-auto mb-10 md:mb-12 relative z-10">
-                <h2 className={`text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
+            <ScrollReveal className="w-full max-w-6xl mx-auto mb-6 sm:mb-10 md:mb-12 relative z-10">
+                <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
                     About Me
                 </h2>
-                <div className={`h-1 w-16 mt-4 rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
+                <div className={`h-1 w-14 sm:w-16 mt-3 sm:mt-4 rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
             </ScrollReveal>
 
             {/* Bento Grid Container */}
-            <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+            <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 relative z-10">
 
                 {/* IDENTITY & BIO CARD - Span 2 columns */}
                 <ScrollReveal delay={0.1} className="lg:col-span-2">
-                    <div className={`h-full border rounded-[2rem] p-7 sm:p-9 md:p-10 flex flex-col justify-between gap-6 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
-                        <div className={`absolute inset-0 rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_0%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_0%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
+                    <div className={`h-full border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 md:p-10 flex flex-col justify-between gap-4 sm:gap-6 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
+                        <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_0%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_0%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
 
-                        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-6 sm:gap-7">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-7">
                             <motion.div
                                 whileHover={{ scale: 1.03 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                 className="relative shrink-0"
                             >
-                                <div className={`p-[2px] rounded-3xl bg-gradient-to-br ${isDarkMode ? 'from-purple-500/40 via-zinc-700/40 to-zinc-800/40' : 'from-purple-500/30 via-zinc-200 to-zinc-300/60'} shadow-xl`}>
+                                <div className={`p-[2px] rounded-2xl sm:rounded-3xl bg-gradient-to-br ${isDarkMode ? 'from-purple-500/40 via-zinc-700/40 to-zinc-800/40' : 'from-purple-500/30 via-zinc-200 to-zinc-300/60'} shadow-xl`}>
                                     {profPicUrl ? (
                                         <button
                                             type="button"
                                             onClick={() => setIsPhotoOpen(true)}
                                             aria-label="View profile picture"
-                                            className={`group relative w-28 h-28 sm:w-32 sm:h-32 rounded-[1.35rem] overflow-hidden flex items-center justify-center cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 ${isDarkMode ? 'bg-zinc-900' : 'bg-white'}`}
+                                            className={`group relative w-20 h-20 sm:w-32 sm:h-32 rounded-[0.9rem] sm:rounded-[1.35rem] overflow-hidden flex items-center justify-center cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 ${isDarkMode ? 'bg-zinc-900' : 'bg-white'}`}
                                         >
                                             <img
                                                 src={profPicUrl}
@@ -148,8 +148,8 @@ export default function Profile({
                                             </span>
                                         </button>
                                     ) : (
-                                        <div className={`w-28 h-28 sm:w-32 sm:h-32 rounded-[1.35rem] overflow-hidden flex items-center justify-center ${isDarkMode ? 'bg-zinc-900' : 'bg-white'}`}>
-                                            <span className={`text-4xl md:text-5xl font-black ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                                        <div className={`w-20 h-20 sm:w-32 sm:h-32 rounded-[0.9rem] sm:rounded-[1.35rem] overflow-hidden flex items-center justify-center ${isDarkMode ? 'bg-zinc-900' : 'bg-white'}`}>
+                                            <span className={`text-3xl sm:text-4xl md:text-5xl font-black ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
                                                 {(myProfile?.name || "A").charAt(0).toUpperCase()}
                                             </span>
                                         </div>
@@ -157,12 +157,12 @@ export default function Profile({
                                 </div>
                             </motion.div>
 
-                            <div className="text-center sm:text-left space-y-2.5 min-w-0 flex-1">
+                            <div className="text-center sm:text-left space-y-1.5 sm:space-y-2.5 min-w-0 flex-1">
                                 <div>
-                                    <h3 className={`text-3xl sm:text-4xl font-black tracking-tight leading-tight ${isDarkMode ? 'text-zinc-50' : 'text-zinc-900'}`}>
+                                    <h3 className={`text-2xl sm:text-4xl font-black tracking-tight leading-tight ${isDarkMode ? 'text-zinc-50' : 'text-zinc-900'}`}>
                                         {myProfile?.name || "Anonymous Developer"}
                                     </h3>
-                                    <p className={`font-semibold text-base sm:text-lg mt-1 ${isDarkMode ? 'text-purple-400' : 'text-purple-800'}`}>
+                                    <p className={`font-semibold text-sm sm:text-lg mt-0.5 sm:mt-1 ${isDarkMode ? 'text-purple-400' : 'text-purple-800'}`}>
                                         {myProfile?.job || "Software Engineer"}
                                     </p>
                                 </div>
@@ -177,8 +177,8 @@ export default function Profile({
                         </div>
 
                         {profileDescription && (
-                            <div className={`pt-5 border-t ${isDarkMode ? 'border-zinc-800/70' : 'border-zinc-200/80'}`}>
-                                <p className={`text-sm sm:text-[15px] leading-relaxed whitespace-pre-line ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
+                            <div className={`pt-4 sm:pt-5 border-t ${isDarkMode ? 'border-zinc-800/70' : 'border-zinc-200/80'}`}>
+                                <p className={`text-xs sm:text-[15px] leading-relaxed whitespace-pre-line ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
                                     {profileDescription}
                                 </p>
                             </div>
@@ -188,14 +188,14 @@ export default function Profile({
 
                 {/* CONNECT / SOCIAL CARD - Span 1 column */}
                 <ScrollReveal delay={0.2} className="lg:col-span-1">
-                    <div className={`h-full border rounded-[2rem] p-7 sm:p-8 flex flex-col gap-4 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
-                        <div className={`absolute inset-0 rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_100%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_100%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
+                    <div className={`h-full border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 flex flex-col gap-3 sm:gap-4 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
+                        <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_100%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_100%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
 
                         <h4 className={`text-xs font-bold uppercase tracking-[0.18em] font-sans ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
                             Connect
                         </h4>
 
-                        <div className="flex flex-col gap-2.5 flex-1 justify-center">
+                        <div className="flex flex-col gap-2 sm:gap-2.5 flex-1 justify-center">
                             {profileLinks.map((link, idx) => (
                                 <motion.a
                                     key={idx}
@@ -204,12 +204,12 @@ export default function Profile({
                                     rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
                                     whileHover={{ x: 4 }}
                                     whileTap={{ scale: 0.99 }}
-                                    className={`flex items-center gap-3 p-2.5 pr-3.5 rounded-2xl border transition-colors duration-200 group ${isDarkMode
+                                    className={`flex items-center gap-3 p-2 sm:p-2.5 pr-3 sm:pr-3.5 rounded-xl sm:rounded-2xl border transition-colors duration-200 group ${isDarkMode
                                         ? 'bg-zinc-900/50 border-zinc-800/80 hover:bg-zinc-800/80 hover:border-purple-500/40 text-zinc-300 hover:text-purple-300'
                                         : 'bg-white border-zinc-200/90 hover:bg-zinc-50 hover:border-purple-700/40 text-zinc-700 hover:text-purple-800'
                                         }`}
                                 >
-                                    <span className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 transition-colors ${isDarkMode ? 'bg-zinc-800/80 text-zinc-300 group-hover:text-purple-300' : 'bg-zinc-100 text-zinc-600 group-hover:text-purple-800'}`}>
+                                    <span className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 transition-colors ${isDarkMode ? 'bg-zinc-800/80 text-zinc-300 group-hover:text-purple-300' : 'bg-zinc-100 text-zinc-600 group-hover:text-purple-800'}`}>
                                         {link.icon}
                                     </span>
                                     <span className="text-xs sm:text-sm font-semibold truncate flex-1">{link.label}</span>
@@ -222,40 +222,40 @@ export default function Profile({
 
                 {/* EDUCATION CARD - Span 3 columns */}
                 <ScrollReveal delay={0.3} className="lg:col-span-3">
-                    <div className={`border rounded-[2rem] p-7 sm:p-9 flex flex-col gap-6 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
-                        <div className={`absolute inset-0 rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_50%_100%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_50%_100%] from-purple-700/5 via-transparent to-transparent'}`} />
+                    <div className={`border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 md:p-9 flex flex-col gap-4 sm:gap-6 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
+                        <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_50%_100%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_50%_100%] from-purple-700/5 via-transparent to-transparent'}`} />
 
                         <div className="flex items-center gap-3">
-                            <div className={`p-2.5 rounded-xl border ${isDarkMode ? 'bg-zinc-800/60 border-zinc-700/70' : 'bg-zinc-100 border-zinc-200'}`}>
-                                <GraduationCap size={19} className={isDarkMode ? 'text-purple-400' : 'text-purple-800'} />
+                            <div className={`p-2 sm:p-2.5 rounded-xl border ${isDarkMode ? 'bg-zinc-800/60 border-zinc-700/70' : 'bg-zinc-100 border-zinc-200'}`}>
+                                <GraduationCap size={18} className={isDarkMode ? 'text-purple-400' : 'text-purple-800'} />
                             </div>
-                            <h4 className={`text-xl sm:text-2xl font-black tracking-tight ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
+                            <h4 className={`text-lg sm:text-2xl font-black tracking-tight ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
                                 Education &amp; Academics
                             </h4>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                             {educations.length > 0 ? (
                                 educations.map((edu) => (
                                     <motion.div
                                         key={edu.id}
                                         whileHover={{ y: -3 }}
                                         transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                                        className={`p-6 border rounded-3xl flex flex-col justify-between gap-4 relative overflow-hidden group ${isDarkMode
+                                        className={`p-4 sm:p-6 border rounded-2xl sm:rounded-3xl flex flex-col justify-between gap-3 sm:gap-4 relative overflow-hidden group ${isDarkMode
                                             ? 'bg-zinc-900/75 border-zinc-800/80 hover:border-purple-500/40 hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)]'
                                             : 'bg-white border-zinc-200/80 hover:border-purple-700/30 hover:shadow-lg'
                                             }`}
                                     >
-                                        <div className="space-y-2.5">
-                                            <div className="flex items-start justify-between gap-2 font-sans">
+                                        <div className="space-y-2 sm:space-y-2.5">
+                                            <div className="flex items-start justify-between gap-2 font-mono">
                                                 <span className={`text-[10px] font-bold tracking-widest uppercase border px-2.5 py-1 rounded-full truncate ${isDarkMode ? 'text-purple-300 bg-purple-500/10 border-purple-500/20' : 'text-purple-900 bg-purple-50 border-purple-200'}`}>
                                                     {formatDatePeriod(edu.start_date)} — {formatDatePeriod(edu.end_date)}
                                                 </span>
-                                                {edu.gpa && <span className={`text-xs font-black ${isDarkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>GPA: {edu.gpa}</span>}
+                                                {edu.gpa && <span className={`text-xs font-bold ${isDarkMode ? 'text-emerald-400' : 'text-emerald-700'}`}>GPA: {edu.gpa}</span>}
                                             </div>
 
                                             <div>
-                                                <h5 className={`text-lg sm:text-xl font-black tracking-tight leading-snug ${isDarkMode ? 'text-zinc-100' : 'text-zinc-800'}`}>
+                                                <h5 className={`text-base sm:text-xl font-black tracking-tight leading-snug ${isDarkMode ? 'text-zinc-100' : 'text-zinc-800'}`}>
                                                     {edu.degree} in {edu.field_of_study}
                                                 </h5>
                                                 <p className={`text-xs sm:text-sm font-bold mt-1 uppercase tracking-wider ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>

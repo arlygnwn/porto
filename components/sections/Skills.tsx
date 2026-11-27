@@ -62,7 +62,7 @@ const SkillCard = ({ category, icon, items, isLarge, isDarkMode, handleSkillClic
         <motion.div
             variants={cardVariants}
             whileHover={{ y: -6, scale: 1.01 }}
-            className={`border rounded-[2rem] p-6 lg:p-8 flex flex-col gap-6 relative overflow-hidden backdrop-blur-xl transition-all duration-500 group w-full
+            className={`border rounded-3xl sm:rounded-[2rem] p-5 sm:p-6 lg:p-8 flex flex-col gap-4 sm:gap-6 relative overflow-hidden backdrop-blur-xl transition-all duration-500 group w-full
                 ${isLarge ? 'md:col-span-2 lg:col-span-2' : 'col-span-1'}
                 ${isDarkMode
                     ? 'bg-gradient-to-br from-zinc-900/80 to-zinc-950/80 border-zinc-800/80 hover:border-purple-500/50 hover:shadow-[0_8px_30px_rgb(147,51,234,0.15)]'
@@ -72,16 +72,16 @@ const SkillCard = ({ category, icon, items, isLarge, isDarkMode, handleSkillClic
             {/* Subtle animated gradient overlay */}
             <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10 ${isDarkMode ? 'bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent' : 'bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-700/10 via-transparent to-transparent'}`} />
 
-            <div className="flex items-center gap-4 relative z-10">
-                <div className={`p-3.5 rounded-2xl border shadow-sm transition-colors ${isDarkMode ? 'bg-zinc-800/80 border-zinc-700/50 group-hover:border-purple-500/50 text-purple-400 group-hover:bg-purple-500/10' : 'bg-white border-zinc-200 group-hover:border-purple-300 text-purple-800 group-hover:bg-purple-50'}`}>
+            <div className="flex items-center gap-3 sm:gap-4 relative z-10">
+                <div className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border shadow-sm transition-colors ${isDarkMode ? 'bg-zinc-800/80 border-zinc-700/50 group-hover:border-purple-500/50 text-purple-400 group-hover:bg-purple-500/10' : 'bg-white border-zinc-200 group-hover:border-purple-300 text-purple-800 group-hover:bg-purple-50'}`}>
                     {icon}
                 </div>
-                <h3 className={`text-xl md:text-2xl font-black tracking-tight ${isDarkMode ? 'text-zinc-100 group-hover:text-purple-300 transition-colors' : 'text-zinc-900 group-hover:text-purple-800 transition-colors'}`}>{category}</h3>
+                <h3 className={`text-lg sm:text-xl md:text-2xl font-black tracking-tight ${isDarkMode ? 'text-zinc-100 group-hover:text-purple-300 transition-colors' : 'text-zinc-900 group-hover:text-purple-800 transition-colors'}`}>{category}</h3>
             </div>
 
             <motion.div
                 variants={containerVariants}
-                className="flex flex-wrap gap-2 md:gap-3 mt-2 relative z-10"
+                className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3 mt-1 sm:mt-2 relative z-10"
             >
                 {items.map((skill: any) => (
                     <motion.div
@@ -90,7 +90,7 @@ const SkillCard = ({ category, icon, items, isLarge, isDarkMode, handleSkillClic
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
                         onClick={() => handleSkillClick(skill.skill_nm)}
-                        className={`border px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2.5 cursor-pointer
+                        className={`border px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 sm:gap-2.5 cursor-pointer
                             transition-all duration-300 shadow-sm hover:shadow-md
                             ${isDarkMode
                                 ? 'bg-zinc-900/80 border-zinc-800 text-zinc-300 hover:text-white hover:border-purple-500/60 hover:bg-purple-500/20'
@@ -169,14 +169,14 @@ export default function Skills({ isDarkMode, skills, handleSkillClick }: SkillsP
     };
 
     return (
-        <section id="skills" className="w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-24 relative overflow-hidden">
+        <section id="skills" className="w-full sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-14 sm:py-24 relative overflow-hidden">
             {/* Background glowing orb */}
             <div className="absolute bottom-0 left-1/2 w-120 h-120 bg-emerald-500/5 rounded-full blur-[120px] -translate-x-1/2 pointer-events-none" />
 
-            <ScrollReveal className="w-full max-w-6xl mx-auto mb-16 text-center relative z-10">
-                <h2 className={`text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Technical Skills</h2>
-                <div className={`h-1 w-20 mt-4 mx-auto rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
-                <p className={`text-base mt-6 font-medium ${textMuted}`}>A curated overview of the technologies and tools that power my projects.</p>
+            <ScrollReveal className="w-full max-w-6xl mx-auto mb-8 sm:mb-16 text-center relative z-10">
+                <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Technical Skills</h2>
+                <div className={`h-1 w-16 sm:w-20 mt-3 sm:mt-4 mx-auto rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
+                <p className={`text-xs sm:text-base mt-3 sm:mt-6 font-medium ${textMuted}`}>A curated overview of the technologies and tools that power my projects.</p>
             </ScrollReveal>
 
             <div className="w-full max-w-6xl mx-auto relative z-10">
@@ -186,7 +186,7 @@ export default function Skills({ isDarkMode, skills, handleSkillClick }: SkillsP
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.1 }}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
                     >
                         {Object.entries(groupedSkills).map(([category, { icon, items }], idx) => {
                             // Bento box pattern: span multiple columns for emphasis

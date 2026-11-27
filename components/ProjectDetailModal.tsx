@@ -70,7 +70,7 @@ export default function ProjectDetailModal({
 
                         {/* Header controls */}
                         <div className="flex justify-between items-start gap-4">
-                            <span className={`text-[10px] font-bold tracking-widest uppercase border px-3 py-1 rounded-full ${isDarkMode ? 'text-purple-400 bg-purple-500/10 border-purple-500/20' : 'text-purple-800 bg-purple-50 border-purple-200'}`}>
+                            <span className={`font-mono text-[10px] font-bold tracking-widest uppercase border px-3 py-1 rounded-full ${isDarkMode ? 'text-purple-400 bg-purple-500/10 border-purple-500/20' : 'text-purple-800 bg-purple-50 border-purple-200'}`}>
                                 {project.company}
                             </span>
                             <button

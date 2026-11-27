@@ -88,7 +88,7 @@ export default function ProjectLibraryModal({
                                 <h2 className={`text-3xl font-black tracking-tight ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
                                     Project Library
                                 </h2>
-                                <p className={`text-xs font-semibold mt-1 uppercase tracking-wider ${isDarkMode ? 'text-purple-400' : 'text-purple-800'}`}>
+                                <p className={`font-mono text-xs font-semibold mt-1 uppercase tracking-wider ${isDarkMode ? 'text-purple-400' : 'text-purple-800'}`}>
                                     Full Catalogue ({filteredProjects.length} Projects)
                                 </p>
                             </div>

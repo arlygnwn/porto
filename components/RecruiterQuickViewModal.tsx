@@ -109,7 +109,7 @@ export default function RecruiterQuickViewModal({
                     {/* Modal Header */}
                     <div className="flex items-start justify-between pb-4 border-b shrink-0 border-inherit">
                         <div>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border bg-purple-500/10 border-purple-500/20 text-purple-400">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full font-mono text-[10px] font-bold tracking-widest uppercase border bg-purple-500/10 border-purple-500/20 text-purple-400">
                                 <Sparkles size={12} />
                                 Recruiter 60-Second Snapshot
                             </div>

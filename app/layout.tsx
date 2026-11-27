@@ -1,8 +1,24 @@
-import { Outfit } from "next/font/google";
+import { Plus_Jakarta_Sans, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import favicon from "./favicon.png";
 
-const outfit = Outfit({ subsets: ["latin"], display: "swap" });
+const jakarta = Plus_Jakarta_Sans({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-jakarta",
+});
+
+const dmSans = DM_Sans({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-dm-sans",
+});
+
+const jetbrains = JetBrains_Mono({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-jetbrains",
+});
 
 import type { Metadata } from 'next';
 
@@ -49,8 +65,8 @@ import ClientLayout from '@/components/ClientLayout';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
-            <body className={`${outfit.className} bg-zinc-100 text-zinc-900 min-h-screen antialiased`}>
+        <html lang="en" className={`${jakarta.variable} ${dmSans.variable} ${jetbrains.variable} scroll-smooth`} data-scroll-behavior="smooth">
+            <body className="font-sans bg-zinc-100 text-zinc-900 min-h-screen antialiased">
                 <AppProvider>
                     <ClientLayout>
                         {children}

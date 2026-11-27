@@ -318,7 +318,6 @@ export default function CommissionClient() {
                         <ChevronUp size={20} />
                     </motion.button>
                     <div className={`flex flex-col items-center gap-2 text-xs font-bold tracking-widest ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                        <span>Built with Next.js &amp; Supabase</span>
                         <span>© {new Date().getFullYear()} — All Rights Reserved</span>
                     </div>
                 </div>

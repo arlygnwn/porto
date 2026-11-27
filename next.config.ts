@@ -40,12 +40,9 @@ const extraDevOrigins = process.env.ALLOWED_DEV_ORIGINS
 
 const nextConfig: NextConfig = {
   /* config options here */
-  // Next.js matches only the hostname (ports are ignored), and dynamically
-  // reading os.networkInterfaces() covers localhost/LAN/VPN IPs automatically.
+  // Next.js matches only the hostname (ports are ignored); dynamically reading
+  // os.networkInterfaces() and ALLOWED_DEV_ORIGINS covers LAN/VPN IPs without hardcoding hosts.
   allowedDevOrigins: Array.from(new Set([
-    "porto.service.local",
-    "localhost",
-    "rly.tail1787c8.ts.net",
     ...getLocalNetworkIps(),
     ...extraDevOrigins,
   ])),

@@ -60,15 +60,15 @@ export default function Experience({
     };
 
     return (
-        <section id="experience" className="w-full min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-24 relative overflow-hidden">
+        <section id="experience" className="w-full sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-14 sm:py-24 relative overflow-hidden">
             {/* Background glowing orb for depth */}
             <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
 
-            <div className="w-full max-w-6xl mx-auto mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6 relative z-10">
+            <div className="w-full max-w-6xl mx-auto mb-8 sm:mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 relative z-10">
                 <ScrollReveal>
-                    <h2 className={`text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Professional Journey</h2>
-                    <div className={`h-1 w-20 mt-4 rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
-                    <p className={`text-sm mt-3 font-medium ${textMuted}`}>Chronological roadmap from early milestones to current roles.</p>
+                    <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>Professional Journey</h2>
+                    <div className={`h-1 w-16 sm:w-20 mt-3 sm:mt-4 rounded-full ${isDarkMode ? 'bg-purple-500/60' : 'bg-purple-700/40'}`} />
+                    <p className={`text-xs sm:text-sm mt-2.5 sm:mt-3 font-medium ${textMuted}`}>Chronological roadmap from early milestones to current roles.</p>
                 </ScrollReveal>
 
                 {/* Horizontal Navigation Buttons */}
@@ -160,37 +160,37 @@ export default function Experience({
                                     <motion.div
                                         whileHover={{ y: -6, scale: 1.01 }}
                                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                        className={`h-full p-7 sm:p-9 rounded-[2rem] flex flex-col justify-between gap-5 relative overflow-hidden group border backdrop-blur-xl transition-[border-color,box-shadow] duration-500 ${
+                                        className={`h-full p-5 sm:p-8 md:p-9 rounded-3xl sm:rounded-[2rem] flex flex-col justify-between gap-4 sm:gap-5 relative overflow-hidden group border backdrop-blur-xl transition-[border-color,box-shadow] duration-500 ${
                                             isDarkMode
                                                 ? 'bg-zinc-900/40 border-zinc-800/60 hover:border-purple-500/30 hover:bg-zinc-900/60 hover:shadow-[0_12px_36px_rgb(0,0,0,0.5)]'
                                                 : 'bg-white/75 border-zinc-200/80 hover:border-purple-700/30 hover:bg-white/90 hover:shadow-[0_12px_36px_rgb(0,0,0,0.06)]'
                                         }`}
                                     >
                                         {/* Inner subtle gradient glow on hover */}
-                                        <div className={`absolute inset-0 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_100%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_100%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
+                                        <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_100%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_100%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
 
-                                        <div className="flex flex-col gap-4">
+                                        <div className="flex flex-col gap-3 sm:gap-4">
                                             <div className="flex items-center justify-between gap-3">
-                                                <span className={`text-xs font-bold tracking-widest uppercase ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                                                <span className={`font-mono text-[11px] sm:text-xs font-semibold tracking-wider uppercase ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
                                                     {exp.period}
                                                 </span>
                                                 {isCurrentActive && (
-                                                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-600/10 border border-purple-500/25 text-xs font-semibold tracking-wide text-purple-400">
+                                                    <div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-purple-600/10 border border-purple-500/25 font-mono text-[10px] sm:text-[11px] font-semibold tracking-wide text-purple-400">
                                                         <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" /> Active
                                                     </div>
                                                 )}
                                             </div>
 
-                                            <div className="space-y-1.5">
-                                                <h3 className={`font-black text-2xl sm:text-3xl tracking-tight leading-snug ${isDarkMode ? 'text-zinc-100 group-hover:text-white' : 'text-zinc-900 group-hover:text-black'} transition-colors duration-300`}>
+                                            <div className="space-y-1 sm:space-y-1.5">
+                                                <h3 className={`font-black text-xl sm:text-2xl md:text-3xl tracking-tight leading-snug ${isDarkMode ? 'text-zinc-100 group-hover:text-white' : 'text-zinc-900 group-hover:text-black'} transition-colors duration-300`}>
                                                     {exp.role}
                                                 </h3>
-                                                <p className={`text-sm font-bold tracking-wider uppercase ${isDarkMode ? 'text-purple-400/90' : 'text-purple-800/90'}`}>
+                                                <p className={`text-xs sm:text-sm font-bold tracking-wider uppercase ${isDarkMode ? 'text-purple-400/90' : 'text-purple-800/90'}`}>
                                                     {exp.company}
                                                 </p>
                                             </div>
 
-                                            <p className={`text-sm font-medium leading-relaxed mt-1 line-clamp-5 ${textMuted}`}>
+                                            <p className={`text-xs sm:text-sm font-medium leading-relaxed mt-0.5 sm:mt-1 line-clamp-5 ${textMuted}`}>
                                                 {exp.description}
                                             </p>
                                         </div>
