@@ -127,6 +127,20 @@ export default function PortfolioLanding({
         setIsLibraryOpen(true);
     };
 
+    const handleNavigateFromModal = (targetId: string) => {
+        setSelectedProject(null);
+        setIsLibraryOpen(false);
+        setIsRecruiterModalOpen(false);
+        document.body.style.overflow = 'unset';
+        isManualScrolling.current = true;
+        setActiveSection(targetId);
+        window.history.replaceState(null, "", `#${targetId}`);
+        requestAnimationFrame(() => {
+            document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            setTimeout(() => { isManualScrolling.current = false; }, 2000);
+        });
+    };
+
     useEffect(() => {
         if (isLoading) return;
         const sections = document.querySelectorAll("section[id]");
@@ -135,9 +149,7 @@ export default function PortfolioLanding({
             if (isManualScrolling.current) return;
             const visible = entries.find(e => e.isIntersecting);
             if (visible) {
-                const targetId = visible.target.id;
-                setActiveSection(targetId);
-                window.history.replaceState(null, "", `#${targetId}`);
+                setActiveSection(visible.target.id);
             }
         }, { rootMargin: "-45% 0px -45% 0px" });
 
@@ -259,6 +271,7 @@ export default function PortfolioLanding({
                 isOpen={!!selectedProject}
                 project={selectedProject}
                 onClose={() => setSelectedProject(null)}
+                onNavigateSection={handleNavigateFromModal}
                 isDarkMode={isDarkMode}
             />
 

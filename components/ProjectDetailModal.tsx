@@ -7,6 +7,7 @@ interface ProjectDetailModalProps {
     isOpen: boolean;
     project: any | null;
     onClose: () => void;
+    onNavigateSection?: (sectionId: string) => void;
     isDarkMode: boolean;
 }
 
@@ -14,6 +15,7 @@ export default function ProjectDetailModal({
     isOpen,
     project,
     onClose,
+    onNavigateSection,
     isDarkMode
 }: ProjectDetailModalProps) {
     // Disable body scroll when modal is open
@@ -56,14 +58,14 @@ export default function ProjectDetailModal({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={handleBackdropClick}
-                    className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/60 cursor-pointer overflow-y-auto"
+                    className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4 backdrop-blur-md bg-black/60 cursor-pointer overflow-y-auto"
                 >
                     <motion.div
                         initial={{ scale: 0.95, y: 20, opacity: 0 }}
                         animate={{ scale: 1, y: 0, opacity: 1 }}
                         exit={{ scale: 0.95, y: 20, opacity: 0 }}
                         transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                        className={`w-full max-w-2xl border rounded-[2rem] p-6 md:p-8 cursor-default relative overflow-hidden backdrop-blur-2xl ${cardBg}`}
+                        className={`w-full max-w-2xl max-h-[calc(100dvh-1.5rem)] overflow-y-auto border rounded-3xl sm:rounded-[2rem] p-5 sm:p-6 md:p-8 cursor-default relative backdrop-blur-2xl ${cardBg}`}
                     >
                         {/* Background subtle glow */}
                         <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] -z-10 pointer-events-none ${isDarkMode ? 'bg-purple-600/10' : 'bg-purple-700/5'}`} />
@@ -204,12 +206,17 @@ export default function ProjectDetailModal({
                             {(project.experience_id || project.education_id) && (
                                 <div className="pt-2">
                                     <button
+                                        type="button"
                                         onClick={() => {
-                                            onClose();
                                             const targetId = project.experience_id ? 'experience' : 'profile';
-                                            const element = document.getElementById(targetId);
-                                            if (element) {
-                                                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                            if (onNavigateSection) {
+                                                onNavigateSection(targetId);
+                                            } else {
+                                                onClose();
+                                                document.body.style.overflow = 'unset';
+                                                requestAnimationFrame(() => {
+                                                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                });
                                             }
                                         }}
                                         className={`w-full py-3.5 px-4 rounded-2xl border text-xs font-bold tracking-wider uppercase text-center cursor-pointer transition-all hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 ${

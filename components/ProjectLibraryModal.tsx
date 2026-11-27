@@ -58,14 +58,14 @@ export default function ProjectLibraryModal({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={handleBackdropClick}
-                    className="fixed inset-0 z-40 flex items-center justify-center p-4 md:p-6 backdrop-blur-xl bg-black/70 cursor-pointer overflow-hidden"
+                    className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 backdrop-blur-xl bg-black/70 cursor-pointer overflow-hidden"
                 >
                     <motion.div
                         initial={{ y: 50, opacity: 0, scale: 0.98 }}
                         animate={{ y: 0, opacity: 1, scale: 1 }}
                         exit={{ y: 50, opacity: 0, scale: 0.98 }}
                         transition={{ type: "spring", stiffness: 300, damping: 28 }}
-                        className={`w-full max-w-6xl h-[90vh] md:h-[85vh] border rounded-[2.5rem] flex flex-col cursor-default relative overflow-hidden backdrop-blur-3xl shadow-2xl ${modalBg}`}
+                        className={`w-full max-w-6xl h-[calc(100dvh-1.5rem)] sm:h-[88vh] md:h-[85vh] border rounded-3xl sm:rounded-[2.5rem] flex flex-col cursor-default relative overflow-hidden backdrop-blur-3xl shadow-2xl ${modalBg}`}
                     >
                         {/* Glow effects */}
                         <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">

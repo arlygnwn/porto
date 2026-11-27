@@ -88,14 +88,14 @@ export default function RecruiterQuickViewModal({
                 onClick={(e) => {
                     if (e.target === e.currentTarget) onClose();
                 }}
-                className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-black/60 cursor-pointer overflow-y-auto"
+                className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 backdrop-blur-md bg-black/60 cursor-pointer overflow-y-auto"
             >
                 <motion.div
                     initial={{ scale: 0.95, y: 20, opacity: 0 }}
                     animate={{ scale: 1, y: 0, opacity: 1 }}
                     exit={{ scale: 0.95, y: 20, opacity: 0 }}
                     transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                    className={`w-full max-w-3xl border rounded-[2rem] p-6 md:p-8 cursor-default relative overflow-hidden backdrop-blur-2xl shadow-2xl max-h-[90vh] flex flex-col ${
+                    className={`w-full max-w-3xl border rounded-3xl sm:rounded-[2rem] p-5 sm:p-6 md:p-7 cursor-default relative overflow-hidden backdrop-blur-2xl shadow-2xl max-h-[calc(100dvh-1.5rem)] sm:max-h-[90vh] flex flex-col ${
                         isDarkMode 
                             ? 'bg-zinc-900/95 border-zinc-800 text-zinc-100' 
                             : 'bg-white/95 border-zinc-200 text-zinc-900'
@@ -107,16 +107,16 @@ export default function RecruiterQuickViewModal({
                     }`} />
 
                     {/* Modal Header */}
-                    <div className="flex items-start justify-between pb-4 border-b shrink-0 border-inherit">
+                    <div className={`flex items-start justify-between pb-3.5 sm:pb-4 border-b shrink-0 ${isDarkMode ? 'border-zinc-800' : 'border-zinc-200'}`}>
                         <div>
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full font-mono text-[10px] font-bold tracking-widest uppercase border bg-purple-500/10 border-purple-500/20 text-purple-400">
                                 <Sparkles size={12} />
                                 Recruiter 60-Second Snapshot
                             </div>
-                            <h2 className="text-2xl md:text-3xl font-black tracking-tight mt-2">
+                            <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight mt-2">
                                 {myProfile?.name || "Developer Profile"}
                             </h2>
-                            <p className="text-sm font-bold text-purple-800 dark:text-purple-400">
+                            <p className="text-xs sm:text-sm font-bold text-purple-800 dark:text-purple-400">
                                 {myProfile?.job || "Backend Developer & Systems Engineer"}
                             </p>
                         </div>
@@ -134,7 +134,7 @@ export default function RecruiterQuickViewModal({
                     </div>
 
                     {/* Scrollable Content Body */}
-                    <div className="overflow-y-auto space-y-6 pt-4 pr-1 no-scrollbar">
+                    <div className="flex-1 min-h-0 overflow-y-auto space-y-4 sm:space-y-5 pt-4 pb-1 pr-1">
 
                         {/* Availability & Location Status */}
                         <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl border bg-emerald-500/5 border-emerald-500/20 text-xs font-semibold">
@@ -276,7 +276,7 @@ export default function RecruiterQuickViewModal({
 
                         {/* Education Highlight */}
                         {latestEdu && (
-                            <div className="p-3.5 rounded-2xl border border-inherit flex items-center gap-3 text-xs">
+                            <div className={`p-3.5 rounded-2xl border flex items-center gap-3 text-xs ${isDarkMode ? 'border-zinc-800 bg-zinc-950/30' : 'border-zinc-200 bg-zinc-50/70'}`}>
                                 <div className={`p-2 rounded-xl border ${isDarkMode ? 'bg-zinc-800 border-zinc-700 text-purple-400' : 'bg-zinc-100 border-zinc-200 text-purple-800'}`}>
                                     <GraduationCap size={16} />
                                 </div>

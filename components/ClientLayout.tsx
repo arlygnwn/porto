@@ -23,28 +23,19 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
     }
 
     return (
-        <div className={`relative min-h-screen overflow-x-clip font-sans antialiased scroll-smooth transition-colors duration-1000 ${isDarkMode ? 'bg-linear-to-br from-zinc-950 via-slate-950 to-purple-950/45 text-zinc-100' : 'bg-linear-to-b from-zinc-100 via-slate-100 to-zinc-200 text-zinc-900'}`}>
-            
-            {/* Global Background Glow Effects */}
-            <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-                {isDarkMode ? (
-                    <>
-                        <div className="absolute top-[-20%] left-[-10%] w-[60%] aspect-square rounded-full bg-purple-900/25 blur-[120px]" />
-                        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] aspect-square rounded-full bg-purple-800/15 blur-[120px]" />
-                    </>
-                ) : (
-                    <>
-                        <div className="absolute top-[-20%] left-[-10%] w-[60%] aspect-square rounded-full bg-slate-300/40 blur-[120px]" />
-                        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] aspect-square rounded-full bg-zinc-300/35 blur-[120px]" />
-                    </>
-                )}
-            </div>
-
+        <div
+            className={`relative min-h-screen overflow-x-clip font-sans antialiased transition-colors duration-200 ${isDarkMode ? 'bg-zinc-950 text-zinc-100' : 'bg-zinc-100 text-zinc-900'}`}
+            style={{
+                backgroundImage: isDarkMode
+                    ? 'radial-gradient(circle at 0% 0%, rgba(88, 28, 135, 0.22), transparent 55%), radial-gradient(circle at 100% 100%, rgba(107, 33, 168, 0.14), transparent 50%)'
+                    : 'radial-gradient(circle at 0% 0%, rgba(203, 213, 225, 0.45), transparent 55%), radial-gradient(circle at 100% 100%, rgba(212, 212, 216, 0.4), transparent 50%)'
+            }}
+        >
             {/* Persistent Navigation Bar */}
             <Navbar />
 
-            {/* Main Page Content */}
-            <div className="relative z-10">
+            {/* Main Page Content (no z-index so fixed modals inside pages can stack above Navbar) */}
+            <div className="relative">
                 {children}
             </div>
         </div>

@@ -4,14 +4,15 @@ export function useTypingAnimation(
     phrases: string[],
     typingSpeed = 80,
     deletingSpeed = 40,
-    pauseDuration = 2000
+    pauseDuration = 2000,
+    enabled = true
 ) {
     const [displayText, setDisplayText] = useState(phrases[0] || "");
     const [phraseIndex, setPhraseIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(() => {
-        if (phrases.length === 0) return;
+        if (!enabled || phrases.length === 0) return;
 
         const currentPhrase = phrases[phraseIndex];
         let timeout: NodeJS.Timeout;
@@ -32,7 +33,7 @@ export function useTypingAnimation(
             }, speed);
         }
         return () => clearTimeout(timeout);
-    }, [displayText, phraseIndex, isDeleting, phrases, typingSpeed, deletingSpeed, pauseDuration]);
+    }, [displayText, phraseIndex, isDeleting, phrases, typingSpeed, deletingSpeed, pauseDuration, enabled]);
 
     return displayText;
 }

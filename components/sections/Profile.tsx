@@ -100,13 +100,13 @@ export default function Profile({
     ].filter(Boolean) as { href: string; label: string; icon: React.ReactNode; target: string }[];
 
     const cardSurface = isDarkMode
-        ? 'bg-zinc-900/45 border-zinc-800/70 hover:border-purple-500/30'
-        : 'bg-white/80 border-zinc-200/80 hover:border-purple-700/30';
+        ? 'bg-zinc-900/75 border-zinc-800/70 hover:border-purple-500/30'
+        : 'bg-white/90 border-zinc-200/80 hover:border-purple-700/30';
 
     return (
-        <section id="profile" className="w-full sm:min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-16 pb-12 sm:pt-24 sm:pb-16 relative overflow-hidden">
+        <section id="profile" className="w-full sm:min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pt-14 sm:pb-16 relative overflow-hidden">
             {/* Subtle ambient glow */}
-            <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-radial from-purple-600/8 via-transparent to-transparent rounded-full pointer-events-none" />
 
             <ScrollReveal className="w-full max-w-6xl mx-auto mb-6 sm:mb-10 md:mb-12 relative z-10">
                 <h2 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}>
@@ -119,8 +119,8 @@ export default function Profile({
             <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 relative z-10">
 
                 {/* IDENTITY & BIO CARD - Span 2 columns */}
-                <ScrollReveal delay={0.1} className="lg:col-span-2">
-                    <div className={`h-full border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 md:p-10 flex flex-col justify-between gap-4 sm:gap-6 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
+                <ScrollReveal delay={0.05} className="lg:col-span-2">
+                    <div className={`h-full border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 md:p-10 flex flex-col justify-between gap-4 sm:gap-6 relative overflow-hidden transition-[border-color,box-shadow] duration-200 hover:shadow-2xl ${cardSurface}`}>
                         <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_0%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_0%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
 
                         <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-7">
@@ -187,8 +187,8 @@ export default function Profile({
                 </ScrollReveal>
 
                 {/* CONNECT / SOCIAL CARD - Span 1 column */}
-                <ScrollReveal delay={0.2} className="lg:col-span-1">
-                    <div className={`h-full border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 flex flex-col gap-3 sm:gap-4 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
+                <ScrollReveal delay={0.1} className="lg:col-span-1">
+                    <div className={`h-full border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 flex flex-col gap-3 sm:gap-4 relative overflow-hidden transition-[border-color,box-shadow] duration-200 hover:shadow-2xl ${cardSurface}`}>
                         <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_100%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_100%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
 
                         <h4 className={`text-xs font-bold uppercase tracking-[0.18em] font-sans ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
@@ -197,14 +197,12 @@ export default function Profile({
 
                         <div className="flex flex-col gap-2 sm:gap-2.5 flex-1 justify-center">
                             {profileLinks.map((link, idx) => (
-                                <motion.a
+                                <a
                                     key={idx}
                                     href={link.href}
                                     target={link.target || "_blank"}
                                     rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
-                                    whileHover={{ x: 4 }}
-                                    whileTap={{ scale: 0.99 }}
-                                    className={`flex items-center gap-3 p-2 sm:p-2.5 pr-3 sm:pr-3.5 rounded-xl sm:rounded-2xl border transition-colors duration-200 group ${isDarkMode
+                                    className={`flex items-center gap-3 p-2 sm:p-2.5 pr-3 sm:pr-3.5 rounded-xl sm:rounded-2xl border transition-[background-color,border-color,color,transform] duration-150 hover:translate-x-1 active:scale-[0.99] group ${isDarkMode
                                         ? 'bg-zinc-900/50 border-zinc-800/80 hover:bg-zinc-800/80 hover:border-purple-500/40 text-zinc-300 hover:text-purple-300'
                                         : 'bg-white border-zinc-200/90 hover:bg-zinc-50 hover:border-purple-700/40 text-zinc-700 hover:text-purple-800'
                                         }`}
@@ -213,16 +211,16 @@ export default function Profile({
                                         {link.icon}
                                     </span>
                                     <span className="text-xs sm:text-sm font-semibold truncate flex-1">{link.label}</span>
-                                    <ArrowUpRight size={15} className="shrink-0 opacity-0 -translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
-                                </motion.a>
+                                    <ArrowUpRight size={15} className="shrink-0 opacity-0 -translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-150" />
+                                </a>
                             ))}
                         </div>
                     </div>
                 </ScrollReveal>
 
                 {/* EDUCATION CARD - Span 3 columns */}
-                <ScrollReveal delay={0.3} className="lg:col-span-3">
-                    <div className={`border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 md:p-9 flex flex-col gap-4 sm:gap-6 backdrop-blur-xl relative overflow-hidden transition-[border-color,box-shadow] duration-500 hover:shadow-2xl ${cardSurface}`}>
+                <ScrollReveal delay={0.15} className="lg:col-span-3">
+                    <div className={`border rounded-3xl sm:rounded-[2rem] p-5 sm:p-8 md:p-9 flex flex-col gap-4 sm:gap-6 relative overflow-hidden transition-[border-color,box-shadow] duration-200 hover:shadow-2xl ${cardSurface}`}>
                         <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-60 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_50%_100%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_50%_100%] from-purple-700/5 via-transparent to-transparent'}`} />
 
                         <div className="flex items-center gap-3">
@@ -237,11 +235,9 @@ export default function Profile({
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                             {educations.length > 0 ? (
                                 educations.map((edu) => (
-                                    <motion.div
+                                    <div
                                         key={edu.id}
-                                        whileHover={{ y: -3 }}
-                                        transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                                        className={`p-4 sm:p-6 border rounded-2xl sm:rounded-3xl flex flex-col justify-between gap-3 sm:gap-4 relative overflow-hidden group ${isDarkMode
+                                        className={`p-4 sm:p-6 border rounded-2xl sm:rounded-3xl flex flex-col justify-between gap-3 sm:gap-4 relative overflow-hidden group transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 ${isDarkMode
                                             ? 'bg-zinc-900/75 border-zinc-800/80 hover:border-purple-500/40 hover:shadow-[0_4px_20px_rgb(0,0,0,0.3)]'
                                             : 'bg-white border-zinc-200/80 hover:border-purple-700/30 hover:shadow-lg'
                                             }`}
@@ -273,23 +269,22 @@ export default function Profile({
                                         {edu.linkedProjects && edu.linkedProjects.length > 0 && (
                                             <div className="flex flex-wrap gap-2 pt-1">
                                                 {edu.linkedProjects.map((pid: string) => (
-                                                    <motion.button
+                                                    <button
+                                                        type="button"
                                                         key={pid}
-                                                        whileHover={{ scale: 1.03 }}
-                                                        whileTap={{ scale: 0.97 }}
                                                         onClick={(e) => {
                                                             e.stopPropagation();
                                                             handleProjectClick(pid);
                                                         }}
-                                                        className={`text-[10px] font-bold uppercase tracking-wider border px-3 py-1.5 rounded-lg flex items-center gap-1.5 cursor-pointer transition-colors ${isDarkMode ? 'bg-zinc-800/50 border-zinc-700/50 text-zinc-300 hover:bg-purple-500/20 hover:text-purple-300' : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-purple-100 hover:text-purple-800'}`}
+                                                        className={`text-[10px] font-bold uppercase tracking-wider border px-3 py-1.5 rounded-lg flex items-center gap-1.5 cursor-pointer transition-[background-color,color,transform] duration-150 hover:scale-[1.03] active:scale-[0.97] ${isDarkMode ? 'bg-zinc-800/50 border-zinc-700/50 text-zinc-300 hover:bg-purple-500/20 hover:text-purple-300' : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-purple-100 hover:text-purple-800'}`}
                                                     >
                                                         <FolderGit2 size={12} />
                                                         <span className="truncate max-w-[12rem]">{projectLibrary.find(p => p.id === pid)?.name || "Project"}</span>
-                                                    </motion.button>
+                                                    </button>
                                                 ))}
                                             </div>
                                         )}
-                                    </motion.div>
+                                    </div>
                                 ))
                             ) : (
                                 <div className={`col-span-full p-8 border border-dashed rounded-3xl text-sm font-sans text-center ${textMuted}`}>

@@ -65,25 +65,17 @@
   /* Chrome / Safari / Edge */
 }
 
-/* Scroll snapping for section transitions */
-html,
-body {
-  scroll-snap-type: y mandatory;
+/* Smooth scrolling for anchor links without forced scroll-snap locking */
+html {
   scroll-behavior: smooth;
 }
 
-@media (max-width: 1023px) {
-
-  html,
-  body {
-    scroll-snap-type: y proximity;
-    /* More forgiving scroll-snapping on mobile screens */
-  }
+section[id] {
+  scroll-margin-top: 3.5rem;
 }
 
-section[id] {
-  scroll-snap-align: start;
-  scroll-margin-top: 4rem;
-  /* Height of the fixed navigation header */
-  scroll-snap-stop: always;
+@media (min-width: 768px) {
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
 }

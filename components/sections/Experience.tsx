@@ -60,9 +60,9 @@ export default function Experience({
     };
 
     return (
-        <section id="experience" className="w-full sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 py-14 sm:py-24 relative overflow-hidden">
+        <section id="experience" className="w-full sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-14 sm:pt-14 sm:pb-20 relative overflow-hidden">
             {/* Background glowing orb for depth */}
-            <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
+            <div className="absolute top-1/2 left-0 w-96 h-96 bg-radial from-purple-600/8 via-transparent to-transparent rounded-full -translate-y-1/2 pointer-events-none" />
 
             <div className="w-full max-w-6xl mx-auto mb-8 sm:mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 relative z-10">
                 <ScrollReveal>
@@ -110,7 +110,7 @@ export default function Experience({
                     ref={scrollContainerRef}
                     className="relative flex overflow-x-auto pb-8 pt-4 px-4 scroll-smooth select-none no-scrollbar"
                     style={{ 
-                        scrollSnapType: 'x mandatory',
+                        scrollSnapType: 'x proximity',
                         paddingLeft: 'max(1rem, calc(50% - 230px))',
                         paddingRight: 'max(1rem, calc(50% - 230px))'
                     }}
@@ -156,18 +156,16 @@ export default function Experience({
                                     }`}
                                 />
 
-                                <ScrollReveal delay={idx * 0.1}>
-                                    <motion.div
-                                        whileHover={{ y: -6, scale: 1.01 }}
-                                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                        className={`h-full p-5 sm:p-8 md:p-9 rounded-3xl sm:rounded-[2rem] flex flex-col justify-between gap-4 sm:gap-5 relative overflow-hidden group border backdrop-blur-xl transition-[border-color,box-shadow] duration-500 ${
+                                <ScrollReveal delay={idx * 40}>
+                                    <div
+                                        className={`h-full p-5 sm:p-8 md:p-9 rounded-3xl sm:rounded-[2rem] flex flex-col justify-between gap-4 sm:gap-5 relative overflow-hidden group border transition-[border-color,box-shadow,background-color,transform] duration-200 hover:-translate-y-1 ${
                                             isDarkMode
-                                                ? 'bg-zinc-900/40 border-zinc-800/60 hover:border-purple-500/30 hover:bg-zinc-900/60 hover:shadow-[0_12px_36px_rgb(0,0,0,0.5)]'
-                                                : 'bg-white/75 border-zinc-200/80 hover:border-purple-700/30 hover:bg-white/90 hover:shadow-[0_12px_36px_rgb(0,0,0,0.06)]'
+                                                ? 'bg-zinc-900/75 border-zinc-800/70 hover:border-purple-500/35 hover:bg-zinc-900/90 hover:shadow-[0_10px_28px_rgb(0,0,0,0.4)]'
+                                                : 'bg-white/90 border-zinc-200/80 hover:border-purple-700/30 hover:bg-white hover:shadow-[0_10px_28px_rgb(0,0,0,0.06)]'
                                         }`}
                                     >
                                         {/* Inner subtle gradient glow on hover */}
-                                        <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_100%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_100%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
+                                        <div className={`absolute inset-0 rounded-3xl sm:rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none -z-10 ${isDarkMode ? 'bg-radial-[at_100%_0%] from-purple-500/10 via-transparent to-transparent' : 'bg-radial-[at_100%_0%] from-purple-700/5 via-transparent to-transparent'}`} />
 
                                         <div className="flex flex-col gap-3 sm:gap-4">
                                             <div className="flex items-center justify-between gap-3">
@@ -198,12 +196,11 @@ export default function Experience({
                                         {exp.linkedProjects && exp.linkedProjects.length > 0 && (
                                             <div className="flex flex-wrap gap-2 pt-4 border-t border-zinc-800/40 dark:border-zinc-800/40">
                                                 {exp.linkedProjects.map((pid: string) => (
-                                                    <motion.button
+                                                    <button
+                                                        type="button"
                                                         key={pid}
-                                                        whileHover={{ scale: 1.05 }}
-                                                        whileTap={{ scale: 0.95 }}
                                                         onClick={() => handleProjectClick(pid)}
-                                                        className={`text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-xl flex items-center gap-1.5 cursor-pointer transition-all ${
+                                                        className={`text-[10px] font-bold tracking-wide uppercase px-3 py-1.5 rounded-xl flex items-center gap-1.5 cursor-pointer transition-[background-color,color,transform] duration-150 hover:scale-[1.03] active:scale-[0.97] ${
                                                             isDarkMode 
                                                                 ? 'bg-zinc-800/50 text-zinc-300 hover:bg-purple-500/20 hover:text-purple-300' 
                                                                 : 'bg-zinc-100 text-zinc-700 hover:bg-purple-100 hover:text-purple-800'
@@ -213,11 +210,11 @@ export default function Experience({
                                                         <span className="truncate max-w-[12rem]">
                                                             {projectLibrary.find(p => p.id === pid)?.name || "Project"}
                                                         </span>
-                                                    </motion.button>
+                                                    </button>
                                                 ))}
                                             </div>
                                         )}
-                                    </motion.div>
+                                    </div>
                                 </ScrollReveal>
                             </div>
                         );

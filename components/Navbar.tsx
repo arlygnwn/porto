@@ -44,7 +44,7 @@ export default function Navbar() {
             isManualScrolling.current = true;
             setActiveSection(link.id);
             window.history.replaceState(null, "", `#${link.id}`);
-            document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             setTimeout(() => { isManualScrolling.current = false; }, 2000);
         } else {
             isManualScrolling.current = true;
@@ -55,8 +55,7 @@ export default function Navbar() {
     };
 
     return (
-        // `layoutRoot` isolates Framer Motion layout animations to prevent buggy cross-page bounding box jumps.
-        <motion.nav layoutRoot className={`backdrop-blur-md border-b fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${isDarkMode ? 'bg-zinc-950/85 border-zinc-800/80' : 'bg-white/90 border-zinc-200/90'}`}>
+        <nav className={`border-b fixed top-0 inset-x-0 z-40 transition-colors duration-200 ${isDarkMode ? 'bg-zinc-950/95 border-zinc-800/80' : 'bg-white/95 border-zinc-200/90'}`}>
             <div className="flex items-center justify-between px-3 sm:px-4 h-14 md:h-16 max-w-7xl mx-auto">
                 {/* Mobile Left: Compact Brand + Current Section Indicator */}
                 <div className="flex md:hidden items-center gap-2 min-w-0">
@@ -197,6 +196,6 @@ export default function Navbar() {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.nav>
+        </nav>
     );
 }

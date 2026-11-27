@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+"use client";
 
-interface ScrollRevealProps extends HTMLMotionProps<"div"> {
+import React, { useEffect, useRef, useState } from 'react';
+
+interface ScrollRevealProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
     className?: string;
     delay?: number;
@@ -9,37 +10,68 @@ interface ScrollRevealProps extends HTMLMotionProps<"div"> {
     duration?: number;
 }
 
-export default function ScrollReveal({ 
-    children, 
-    className = "", 
-    delay = 0, 
+const hiddenTransform: Record<NonNullable<ScrollRevealProps['direction']>, string> = {
+    up: 'translate-y-4',
+    down: '-translate-y-4',
+    left: 'translate-x-4',
+    right: '-translate-x-4',
+    none: '',
+};
+
+export default function ScrollReveal({
+    children,
+    className = "",
+    delay = 0,
     direction = 'up',
-    duration = 0.6,
-    ...props 
+    duration = 320,
+    style,
+    ...props
 }: ScrollRevealProps) {
-    
-    const directionOffset = {
-        up: { y: 30, x: 0 },
-        down: { y: -30, x: 0 },
-        left: { x: 30, y: 0 },
-        right: { x: -30, y: 0 },
-        none: { x: 0, y: 0 }
-    };
+    const ref = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+
+        if (typeof IntersectionObserver === 'undefined') {
+            setIsVisible(true);
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.05, rootMargin: '0px 0px -24px 0px' }
+        );
+
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
+    const delayMs = delay > 10 ? delay : Math.round(delay * 1000);
+    const durationMs = duration > 10 ? duration : Math.round(duration * 1000);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, ...directionOffset[direction] }}
-            whileInView={{ opacity: 1, x: 0, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{
-                duration: duration,
-                delay: delay > 10 ? delay / 1000 : delay, // support both ms and s for easy migration
-                ease: [0.25, 0.1, 0.25, 1.0] // smooth easing
+        <div
+            ref={ref}
+            style={{
+                transitionDuration: `${durationMs}ms`,
+                transitionDelay: `${delayMs}ms`,
+                ...style,
             }}
-            className={className}
+            className={`transition-[opacity,transform] ease-out ${
+                isVisible
+                    ? 'opacity-100 translate-x-0 translate-y-0'
+                    : `opacity-0 will-change-[opacity,transform] ${hiddenTransform[direction]}`
+            } ${className}`}
             {...props}
         >
             {children}
-        </motion.div>
+        </div>
     );
 }
