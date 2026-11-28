@@ -60,15 +60,15 @@ const SkillCard = ({ category, icon, items, isLarge, isDarkMode, handleSkillClic
     return (
         <ScrollReveal
             delay={delay}
-            className={`border rounded-3xl sm:rounded-[2rem] p-5 sm:p-6 lg:p-8 flex flex-col gap-4 sm:gap-6 relative overflow-hidden transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 group w-full
+            className={`border rounded-3xl sm:rounded-4xl p-5 sm:p-6 lg:p-8 flex flex-col gap-4 sm:gap-6 relative overflow-hidden transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 group w-full
                 ${isLarge ? 'md:col-span-2 lg:col-span-2' : 'col-span-1'}
                 ${isDarkMode
-                    ? 'bg-gradient-to-br from-zinc-900/90 to-zinc-950/90 border-zinc-800/80 hover:border-purple-500/50 hover:shadow-[0_8px_24px_rgb(147,51,234,0.12)]'
-                    : 'bg-gradient-to-br from-white/95 to-zinc-50/95 border-zinc-200/80 hover:border-purple-700/40 hover:shadow-[0_8px_24px_rgb(107,33,168,0.1)]'
+                    ? 'bg-linear-to-br from-zinc-900/90 to-zinc-950/90 border-zinc-800/80 hover:border-purple-500/50 hover:shadow-[0_8px_24px_rgb(147,51,234,0.12)]'
+                    : 'bg-linear-to-br from-white/95 to-zinc-50/95 border-zinc-200/80 hover:border-purple-700/40 hover:shadow-[0_8px_24px_rgb(107,33,168,0.1)]'
                 }`}
         >
             {/* Subtle gradient overlay on hover */}
-            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none -z-10 ${isDarkMode ? 'bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent' : 'bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-700/10 via-transparent to-transparent'}`} />
+            <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none -z-10 ${isDarkMode ? 'bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent' : 'bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-purple-700/10 via-transparent to-transparent'}`} />
 
             <div className="flex items-center gap-3 sm:gap-4 relative z-10">
                 <div className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border shadow-sm transition-colors ${isDarkMode ? 'bg-zinc-800/80 border-zinc-700/50 group-hover:border-purple-500/50 text-purple-400 group-hover:bg-purple-500/10' : 'bg-white border-zinc-200 group-hover:border-purple-300 text-purple-800 group-hover:bg-purple-50'}`}>
@@ -84,7 +84,7 @@ const SkillCard = ({ category, icon, items, isLarge, isDarkMode, handleSkillClic
                         key={skill.id || skill.skill_nm}
                         onClick={() => handleSkillClick(skill.skill_nm)}
                         className={`border px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 sm:gap-2.5 cursor-pointer
-                            transition-[transform,colors,border-color] duration-150 hover:-translate-y-0.5 active:scale-95 shadow-xs
+                            transition-[transform,color,background-color,border-color] duration-150 hover:-translate-y-0.5 active:scale-95 shadow-xs
                             ${isDarkMode
                                 ? 'bg-zinc-900/80 border-zinc-800 text-zinc-300 hover:text-white hover:border-purple-500/60 hover:bg-purple-500/20'
                                 : 'bg-white border-zinc-200/80 text-zinc-700 hover:text-purple-900 hover:border-purple-700/50 hover:bg-purple-50'
@@ -131,13 +131,13 @@ export default function Skills({ isDarkMode, skills, handleSkillClick }: SkillsP
             }
             const safeIconUrl = sanitizeHttpUrl(skill.icon_url);
             const displayIcon = safeIconUrl ? (
-                <img src={safeIconUrl} alt={`${skill.skill_nm} icon`} className="w-[15px] h-[15px] object-contain" />
+                <img src={safeIconUrl} alt={`${skill.skill_nm} icon`} className="w-3.75 h-3.75 object-contain" />
             ) : getCategoryIcon(category, 15);
             
             groups[category].items.push({ ...skill, displayIcon });
         });
         return groups;
-    }, [skills, isDarkMode]);
+    }, [skills]);
 
     return (
         <section id="skills" className="w-full sm:min-h-[calc(100vh-4rem)] flex flex-col justify-center px-4 sm:px-6 lg:px-8 pt-8 pb-14 sm:pt-14 sm:pb-20 relative overflow-hidden">
@@ -168,7 +168,7 @@ export default function Skills({ isDarkMode, skills, handleSkillClick }: SkillsP
                         })}
                     </div>
                 ) : (
-                    <div className={`border border-dashed rounded-[2rem] p-16 text-center font-sans tracking-wide w-full ${isDarkMode ? 'bg-zinc-900/60 border-zinc-800 text-zinc-500' : 'bg-white/80 border-zinc-200 text-zinc-400'}`}>
+                    <div className={`border border-dashed rounded-4xl p-16 text-center font-sans tracking-wide w-full ${isDarkMode ? 'bg-zinc-900/60 border-zinc-800 text-zinc-500' : 'bg-white/80 border-zinc-200 text-zinc-400'}`}>
                         No skills found.
                     </div>
                 )}

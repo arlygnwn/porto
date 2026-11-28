@@ -58,14 +58,14 @@ export default function ProjectDetailModal({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={handleBackdropClick}
-                    className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-4 backdrop-blur-md bg-black/60 cursor-pointer overflow-y-auto"
+                    className="fixed inset-0 z-60 flex items-center justify-center p-3 sm:p-4 backdrop-blur-md bg-black/60 cursor-pointer overflow-y-auto"
                 >
                     <motion.div
                         initial={{ scale: 0.95, y: 20, opacity: 0 }}
                         animate={{ scale: 1, y: 0, opacity: 1 }}
                         exit={{ scale: 0.95, y: 20, opacity: 0 }}
                         transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                        className={`w-full max-w-2xl max-h-[calc(100dvh-1.5rem)] overflow-y-auto border rounded-3xl sm:rounded-[2rem] p-5 sm:p-6 md:p-8 cursor-default relative backdrop-blur-2xl ${cardBg}`}
+                        className={`w-full max-w-2xl max-h-[calc(100dvh-1.5rem)] overflow-y-auto border rounded-3xl sm:rounded-4xl p-5 sm:p-6 md:p-8 cursor-default relative backdrop-blur-2xl ${cardBg}`}
                     >
                         {/* Background subtle glow */}
                         <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] -z-10 pointer-events-none ${isDarkMode ? 'bg-purple-600/10' : 'bg-purple-700/5'}`} />
@@ -122,7 +122,7 @@ export default function ProjectDetailModal({
                                 <h4 className={`text-xs font-bold uppercase tracking-wider ${isDarkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
                                     Description & Details
                                 </h4>
-                                <p className={`text-sm sm:text-base font-medium leading-relaxed whitespace-pre-wrap ${textMuted}`}>
+                                <p className={`text-sm sm:text-base font-medium leading-relaxed whitespace-pre-wrap text-justify ${textMuted}`}>
                                     {project.details}
                                 </p>
                             </div>

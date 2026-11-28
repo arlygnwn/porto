@@ -155,7 +155,7 @@ export default function PortfolioLanding({
 
         sections.forEach(s => observer.observe(s));
         return () => sections.forEach(s => observer.unobserve(s));
-    }, [isLoading]);
+    }, [isLoading, setActiveSection]);
 
     // Keep the browser tab title in sync with the section currently in view
     useEffect(() => {

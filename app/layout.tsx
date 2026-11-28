@@ -1,4 +1,7 @@
+import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, DM_Sans, JetBrains_Mono } from "next/font/google";
+import { AppProvider } from '@/providers/AppProvider';
+import ClientLayout from '@/components/ClientLayout';
 import "./globals.css";
 import favicon from "./favicon.png";
 
@@ -17,10 +20,9 @@ const dmSans = DM_Sans({
 const jetbrains = JetBrains_Mono({
     subsets: ["latin"],
     display: "swap",
+    preload: false,
     variable: "--font-jetbrains",
 });
-
-import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://arly.tigaempat.com"),
@@ -59,9 +61,6 @@ export const metadata: Metadata = {
         apple: favicon.src,
     },
 };
-
-import { AppProvider } from '@/providers/AppProvider';
-import ClientLayout from '@/components/ClientLayout';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Home, Briefcase, FolderGit2, Code, User, Sun, Moon, FileText, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname, useRouter } from 'next/navigation';
@@ -21,11 +21,10 @@ export default function Navbar() {
     const { activeSection, setActiveSection, isManualScrolling, isDarkMode, setIsDarkMode } = useAppContext();
     const pathname = usePathname();
     const router = useRouter();
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [mobileMenuPath, setMobileMenuPath] = useState<string | null>(null);
+    const isMobileMenuOpen = mobileMenuPath === pathname;
 
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [pathname]);
+    const closeMobileMenu = () => setMobileMenuPath(null);
 
     const activeLink = navigationLinks.find((link) =>
         link.path ? pathname === link.path : (pathname === '/' && activeSection === link.id)
@@ -33,7 +32,7 @@ export default function Navbar() {
 
     const handleNavClick = (e: React.MouseEvent, link: { label: string; id: string; path?: string }) => {
         e.preventDefault();
-        setIsMobileMenuOpen(false);
+        closeMobileMenu();
 
         if (link.path) {
             router.push(link.path);
@@ -60,7 +59,7 @@ export default function Navbar() {
                 {/* Mobile Left: Compact Brand + Current Section Indicator */}
                 <div className="flex md:hidden items-center gap-2 min-w-0">
                     <a
-                        href="#home"
+                        href="/#home"
                         onClick={(e) => handleNavClick(e, navigationLinks[0])}
                         className={`font-display font-extrabold text-sm tracking-tight shrink-0 ${isDarkMode ? 'text-zinc-100' : 'text-zinc-900'}`}
                     >
@@ -144,7 +143,7 @@ export default function Navbar() {
                     {/* Mobile Menu Toggle Button */}
                     <motion.button
                         whileTap={{ scale: 0.92 }}
-                        onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                        onClick={() => setMobileMenuPath((prev) => (prev === pathname ? null : pathname))}
                         className={`md:hidden p-1.5 rounded-lg border cursor-pointer transition-colors ${
                             isMobileMenuOpen
                                 ? (isDarkMode ? 'bg-violet-950/70 border-violet-700/60 text-violet-300' : 'bg-violet-50 border-violet-300 text-violet-800')

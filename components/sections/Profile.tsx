@@ -129,7 +129,7 @@ export default function Profile({
                                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                                 className="relative shrink-0"
                             >
-                                <div className={`p-[2px] rounded-2xl sm:rounded-3xl bg-gradient-to-br ${isDarkMode ? 'from-purple-500/40 via-zinc-700/40 to-zinc-800/40' : 'from-purple-500/30 via-zinc-200 to-zinc-300/60'} shadow-xl`}>
+                                <div className={`p-[2px] rounded-2xl sm:rounded-3xl bg-linear-to-br ${isDarkMode ? 'from-purple-500/40 via-zinc-700/40 to-zinc-800/40' : 'from-purple-500/30 via-zinc-200 to-zinc-300/60'} shadow-xl`}>
                                     {profPicUrl ? (
                                         <button
                                             type="button"
@@ -178,7 +178,7 @@ export default function Profile({
 
                         {profileDescription && (
                             <div className={`pt-4 sm:pt-5 border-t ${isDarkMode ? 'border-zinc-800/70' : 'border-zinc-200/80'}`}>
-                                <p className={`text-xs sm:text-[15px] leading-relaxed whitespace-pre-line ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
+                                <p className={`text-xs sm:text-[15px] leading-relaxed whitespace-pre-line text-justify ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
                                     {profileDescription}
                                 </p>
                             </div>
@@ -261,7 +261,7 @@ export default function Profile({
                                         </div>
 
                                         {edu.education_desc && (
-                                            <p className={`text-sm font-medium leading-relaxed border-t pt-3.5 ${isDarkMode ? 'border-zinc-800/60 text-zinc-400' : 'border-zinc-200/70 text-zinc-600'}`}>
+                                            <p className={`text-sm font-medium leading-relaxed border-t pt-3.5 text-justify ${isDarkMode ? 'border-zinc-800/60 text-zinc-400' : 'border-zinc-200/70 text-zinc-600'}`}>
                                                 {edu.education_desc}
                                             </p>
                                         )}
@@ -304,7 +304,7 @@ export default function Profile({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsPhotoOpen(false)}
-                        className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md cursor-zoom-out"
+                        className="fixed inset-0 z-60 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md cursor-zoom-out"
                     >
                         <motion.div
                             initial={{ scale: 0.94, opacity: 0, y: 8 }}

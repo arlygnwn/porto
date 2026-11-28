@@ -188,7 +188,7 @@ export default function Experience({
                                                 </p>
                                             </div>
 
-                                            <p className={`text-xs sm:text-sm font-medium leading-relaxed mt-0.5 sm:mt-1 line-clamp-5 ${textMuted}`}>
+                                            <p className={`text-xs sm:text-sm font-medium leading-relaxed mt-0.5 sm:mt-1 line-clamp-5 text-justify ${textMuted}`}>
                                                 {exp.description}
                                             </p>
                                         </div>

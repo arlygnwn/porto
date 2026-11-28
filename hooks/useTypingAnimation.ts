@@ -20,8 +20,10 @@ export function useTypingAnimation(
         if (!isDeleting && displayText === currentPhrase) {
             timeout = setTimeout(() => setIsDeleting(true), pauseDuration);
         } else if (isDeleting && displayText === "") {
-            setIsDeleting(false);
-            setPhraseIndex((prev) => (prev + 1) % phrases.length);
+            timeout = setTimeout(() => {
+                setIsDeleting(false);
+                setPhraseIndex((prev) => (prev + 1) % phrases.length);
+            }, 0);
         } else {
             const speed = isDeleting ? deletingSpeed : typingSpeed;
             timeout = setTimeout(() => {

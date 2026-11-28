@@ -37,6 +37,67 @@ function GithubIcon({ size = 12, className = "" }: { size?: number; className?: 
     );
 }
 
+function parseDescriptionLines(text: unknown): { leadIn: string | null; bullets: string[] } {
+    if (typeof text !== 'string') return { leadIn: null, bullets: [] };
+    const rawLines = text
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean);
+
+    if (rawLines.length === 0) return { leadIn: null, bullets: [] };
+
+    const stripBullet = (line: string) => {
+        if (/^[•●▪◦‣]/.test(line)) return line.replace(/^[•●▪◦‣]+\s*/, '').trim();
+        return line.replace(/^[-*]\s+/, '').trim();
+    };
+
+    const hasExplicitBullets = rawLines.slice(1).some((line) => /^(?:[•●▪◦‣]|[-*]\s)/.test(line));
+    if (rawLines.length > 1 && rawLines[0].endsWith(':') && hasExplicitBullets) {
+        return {
+            leadIn: rawLines[0],
+            bullets: rawLines.slice(1).map(stripBullet).filter(Boolean),
+        };
+    }
+
+    if (rawLines.length === 1 && (rawLines[0].match(/[•●▪◦‣]/g)?.length ?? 0) >= 2) {
+        const splitBullets = rawLines[0]
+            .split(/[•●▪◦‣]+/)
+            .map((part) => part.trim())
+            .filter(Boolean);
+        return { leadIn: null, bullets: splitBullets };
+    }
+
+    return {
+        leadIn: null,
+        bullets: rawLines.map(stripBullet).filter(Boolean),
+    };
+}
+
+function ProjectDescription({ details, textClassName }: { details: unknown; textClassName: string }) {
+    const { leadIn, bullets } = parseDescriptionLines(details);
+
+    if (bullets.length === 0 && !leadIn) return null;
+
+    if (bullets.length === 1 && !leadIn && bullets[0] === "No Description") {
+        return <p className={`mt-1 leading-relaxed text-justify ${textClassName}`}>{bullets[0]}</p>;
+    }
+
+    return (
+        <div className={`mt-1 leading-relaxed text-justify ${textClassName}`}>
+            {leadIn && <p className="mb-1">{leadIn}</p>}
+            {bullets.length > 0 && (
+                <ul className="list-disc list-outside pl-4 space-y-0.5">
+                    {bullets.map((item, idx) => (
+                        <li key={idx} className="leading-relaxed">
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+}
+
 interface ResumeViewProps {
     initialProfile: Record<string, any> | null;
     initialExperiences: any[];
@@ -203,7 +264,7 @@ export default function ResumeView({
                             <div className="flex flex-col">
                                 <span className="text-xs font-bold tracking-tight text-white flex items-center gap-1.5">
                                     <span>Curriculum Vitae</span>
-                                    <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Viewable PDF</span>
+                                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">Viewable PDF</span>
                                 </span>
                             </div>
                         </div>
@@ -355,7 +416,7 @@ export default function ResumeView({
                                         </h2>
                                     </div>
                                     <div className="md:col-span-8">
-                                        <p className="text-xs sm:text-[13px] text-zinc-700 leading-relaxed">
+                                        <p className="text-xs sm:text-[13px] text-zinc-700 leading-relaxed text-justify">
                                             Results-driven Backend Developer specialized in clean server-side architecture, high-throughput microservices, and database tuning. Proven experience building fault-tolerant APIs, asynchronous worker queues, and zero-downtime CI/CD container pipelines. Dedicated to writing verifiable, maintainable code with high production reliability and sub-100ms response times.
                                         </p>
                                     </div>
@@ -367,7 +428,7 @@ export default function ResumeView({
                                 <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-6 border-b border-zinc-200 pb-5">
                                     <div className="md:col-span-4">
                                         <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-900">
-                                            Core Technical Stack
+                                            Core Technologies
                                         </h2>
                                         <p className="text-[11px] text-zinc-500 mt-0.5">Categorized by production depth</p>
                                     </div>
@@ -431,7 +492,7 @@ export default function ResumeView({
                                                 <div className="text-xs font-semibold text-zinc-600">
                                                     {exp.company}
                                                 </div>
-                                                <p className="mt-1.5 text-xs text-zinc-700 leading-relaxed">
+                                                <p className="mt-1.5 text-xs text-zinc-700 leading-relaxed text-justify">
                                                     {exp.description}
                                                 </p>
 
@@ -441,7 +502,7 @@ export default function ResumeView({
                                                         <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-800 block mb-1">
                                                             Key Accomplishments:
                                                         </span>
-                                                        <ul className="list-disc list-inside space-y-1 text-xs text-zinc-700">
+                                                        <ul className="list-disc list-inside space-y-1 text-xs text-zinc-700 text-justify">
                                                             {exp.achievements.map((item: string, i: number) => (
                                                                 <li key={i} className="leading-relaxed">
                                                                     <span>{item}</span>
@@ -475,9 +536,7 @@ export default function ResumeView({
                                                     <span className="text-[11px] font-mono text-zinc-500">{proj.period}</span>
                                                 </div>
 
-                                                <p className="text-xs text-zinc-700 mt-1 leading-relaxed">
-                                                    {proj.details}
-                                                </p>
+                                                <ProjectDescription details={proj.details} textClassName="text-xs text-zinc-700" />
 
                                                 {/* Measurable Business & Engineering Impact */}
                                                 {proj.metrics && (
@@ -490,7 +549,7 @@ export default function ResumeView({
                                                 {/* Stack & Verification Links */}
                                                 <div className="mt-1.5 flex flex-wrap items-center justify-between gap-2 text-[11px]">
                                                     <div className="text-zinc-600">
-                                                        <span className="font-semibold text-zinc-800">Stack: </span>
+                                                        <span className="font-semibold text-zinc-800">Technologies: </span>
                                                         <span>{Array.isArray(proj.tech) ? proj.tech.join(" • ") : proj.tech}</span>
                                                     </div>
 
@@ -552,7 +611,7 @@ export default function ResumeView({
                                                     </div>
                                                 )}
                                                 {edu.education_desc && (
-                                                    <div className="text-xs text-zinc-600 mt-1">
+                                                    <div className="text-xs text-zinc-600 mt-1 text-justify">
                                                         <span className="font-semibold text-zinc-800">Key Coursework: </span>
                                                         {edu.education_desc}
                                                     </div>
@@ -580,7 +639,7 @@ export default function ResumeView({
                                             <span className="font-semibold text-zinc-900">Availability: </span>
                                             <span>{profile.availability || "Open for Commissions / 1 Month Notice for Full-Time Roles"}</span>
                                         </div>
-                                        <div>
+                                        <div className="text-justify">
                                             <span className="font-semibold text-zinc-900">References: </span>
                                             <span>Professional references available upon request. Only select public code repositories are available on GitHub (not all project source code is publicly available due to client/NDA restrictions).</span>
                                         </div>
@@ -625,7 +684,7 @@ export default function ResumeView({
                                 <h2 className="text-xs font-bold tracking-wider text-zinc-900 uppercase border-b border-zinc-200 pb-1 mb-2">
                                     Professional Summary
                                 </h2>
-                                <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                                <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed text-justify">
                                     Results-driven Backend Developer specialized in designing clean, scalable server-side solutions, high-performance API architectures, and resilient distributed systems. Experienced in relational database optimization with PostgreSQL, low-latency asynchronous worker pipelines, and modern DevOps containerization.
                                 </p>
                             </section>
@@ -633,7 +692,7 @@ export default function ResumeView({
                             {/* CORE COMPETENCIES */}
                             <section className="print-break-inside-avoid">
                                 <h2 className="text-xs font-bold tracking-wider text-zinc-900 uppercase border-b border-zinc-200 pb-1 mb-2">
-                                    Core Technical Stack
+                                    Core Technologies
                                 </h2>
                                 <div className="space-y-2 pt-1">
                                     <div>
@@ -667,7 +726,7 @@ export default function ResumeView({
                                     Professional Experience
                                 </h2>
                                 <div className="space-y-4">
-                                    {experiences.map((exp: any, idx: number) => (
+                                    {sortedExperiences.map((exp: any, idx: number) => (
                                         <div key={idx} className="print-break-inside-avoid">
                                             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
                                                 <div>
@@ -676,11 +735,11 @@ export default function ResumeView({
                                                 </div>
                                                 <span className="text-xs font-mono text-zinc-500">{exp.period}</span>
                                             </div>
-                                            <p className="text-xs sm:text-sm text-zinc-700 mt-1 leading-relaxed">
+                                            <p className="text-xs sm:text-sm text-zinc-700 mt-1 leading-relaxed text-justify">
                                                 {exp.description}
                                             </p>
                                             {exp.achievements && (
-                                                <ul className="list-disc list-inside mt-1.5 text-xs text-zinc-700 space-y-0.5">
+                                                <ul className="list-disc list-inside mt-1.5 text-xs text-zinc-700 space-y-0.5 text-justify">
                                                     {exp.achievements.map((item: string, i: number) => (
                                                         <li key={i}>{item}</li>
                                                     ))}
@@ -703,7 +762,7 @@ export default function ResumeView({
                                                 <h3 className="text-sm font-bold text-zinc-900">{proj.name}</h3>
                                                 <span className="text-xs font-mono text-zinc-500">{proj.period}</span>
                                             </div>
-                                            <p className="text-xs sm:text-sm text-zinc-700 mt-1 leading-relaxed">{proj.details}</p>
+                                            <ProjectDescription details={proj.details} textClassName="text-xs sm:text-sm text-zinc-700" />
                                             {proj.metrics && (
                                                 <div className="mt-1 text-xs text-emerald-800 font-semibold">
                                                     Impact: {proj.metrics}

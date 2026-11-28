@@ -88,11 +88,11 @@ export default function CommissionClient() {
                         className="inline-flex items-center gap-2 px-4 py-2 rounded-full border shadow-sm backdrop-blur-md font-semibold text-sm transition-colors"
                         style={{ borderColor: isDarkMode ? 'rgba(99,102,241,0.3)' : 'rgba(99,102,241,0.2)', backgroundColor: isDarkMode ? 'rgba(99,102,241,0.1)' : 'rgba(99,102,241,0.05)', color: isDarkMode ? '#818CF8' : '#4F46E5' }}
                     >
-                        <Zap size={16} className="text-amber-400" /> Available for Commision
+                        <Zap size={16} className="text-amber-400" /> Available for Commission
                     </motion.div>
 
                     <h1 className={`text-5xl md:text-7xl font-black tracking-tighter ${textPrimary}`}>
-                        Let's Build Something <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-700 to-purple-500">Amazing</span>
+                        Let&apos;s Build Something <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-700 to-purple-500">Amazing</span>
                     </h1>
                     <p className={`text-xl md:text-2xl max-w-2xl leading-relaxed ${textSecondary}`}>
                         Robust infrastructure, custom API development, and DevOps automation tailored for scale.
@@ -197,8 +197,8 @@ export default function CommissionClient() {
                                             <CheckCircle2 size={48} />
                                         </div>
                                         <div>
-                                            <h3 className={`text-3xl font-black ${textPrimary}`}>Great! Let's discuss details.</h3>
-                                            <p className={`mt-3 font-medium ${textSecondary}`}>I've drafted an email based on your selections.</p>
+                                            <h3 className={`text-3xl font-black ${textPrimary}`}>Great! Let&apos;s discuss details.</h3>
+                                            <p className={`mt-3 font-medium ${textSecondary}`}>I&apos;ve drafted an email based on your selections.</p>
                                         </div>
 
                                         <motion.a
