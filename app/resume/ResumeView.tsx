@@ -601,7 +601,7 @@ export default function ResumeView({
                                                 <div className="text-sm font-bold text-zinc-900 mt-0.5">
                                                     {edu.degree} in {edu.field_of_study}
                                                 </div>
-                                                <div className="text-xs font-semibold text-zinc-700">
+                                                <div className="text-xs font-semibold text-zinc-600">
                                                     {edu.institution}
                                                 </div>
                                                 {edu.gpa && (

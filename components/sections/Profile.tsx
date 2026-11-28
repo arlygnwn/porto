@@ -254,7 +254,7 @@ export default function Profile({
                                                 <h5 className={`text-base sm:text-xl font-black tracking-tight leading-snug ${isDarkMode ? 'text-zinc-100' : 'text-zinc-800'}`}>
                                                     {edu.degree} in {edu.field_of_study}
                                                 </h5>
-                                                <p className={`text-xs sm:text-sm font-bold mt-1 uppercase tracking-wider ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                                                <p className={`text-xs sm:text-sm font-bold mt-1 uppercase tracking-wider ${isDarkMode ? 'text-purple-400/90' : 'text-purple-800/90'}`}>
                                                     {edu.institution}
                                                 </p>
                                             </div>
